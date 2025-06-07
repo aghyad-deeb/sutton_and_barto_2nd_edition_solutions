@@ -28,3 +28,10 @@ average converges to the true average for the arm that is picked repeatidly but
 not for the other arms as they may not be picked enough, so we expect it to
 stick with the optimal arm if it picked it early on (~35% of the time based on
 Figure 2.2) but also totally avoid it if it's not picked early on.
+
+## 2.4
+For $n$ steps, the weighting of the reward $R_i$, which we'll call $w_i$ is
+$$w_i = \alpha_i \; \Pi_{j=i+1}^n \,(1- \alpha_j)$$
+
+This can be found be spreading out th terms of $(2.6)$ but with replacing 
+$\alpha$ with the $\alpha_i$ for each timestep $i$.
