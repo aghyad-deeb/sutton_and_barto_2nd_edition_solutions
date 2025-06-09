@@ -9,7 +9,7 @@ class StepSizeType(Enum):
 
 class ActionValueMethod(Enum):
     GREEDY = 0
-    EPSILONG_GREEDY = 1
+    EPSILON_GREEDY = 1
 
 seed = 42
 G = np.random.default_rng(seed=seed)
@@ -53,7 +53,7 @@ def step(
     ):
     if action_value_method == ActionValueMethod.GREEDY:
         action = greedy(qs)
-    elif action_value_method == ActionValueMethod.EPSILONG_GREEDY:
+    elif action_value_method == ActionValueMethod.EPSILON_GREEDY:
         action = epsilon_greedy(qs)
     num_action_picks[action] += 1
     # reward = sample_normal(mean=q_stars[action], std=1)
@@ -76,8 +76,8 @@ def step(
         qs=qs.copy(), q_stars=q_stars.copy(), action=action, reward=reward, optimal=optimal
     )
 
-def plot(results):
-    for action_value_method in [ActionValueMethod.GREEDY, ActionValueMethod.EPSILONG_GREEDY]:
+def plot_reward(results):
+    for action_value_method in [ActionValueMethod.GREEDY, ActionValueMethod.EPSILON_GREEDY]:
         for step_size_type in [StepSizeType.SAMPLE_AVERAGE, StepSizeType.CONSTANT]:
             runs = np.array(results[action_value_method][step_size_type])
             rewards_list = [[step["reward"] for step in run] for run in runs]
@@ -87,15 +87,33 @@ def plot(results):
         plt.title(f"Rewards over Time {action_value_method.name}")
         plt.xlabel("Timestep")
         plt.ylabel("Reward")
-        # plt.ylim((-0.11, 0.6))
         plt.legend()
         plt.show()
 
+def plot_optimal(results):
+    for action_value_method in [ActionValueMethod.GREEDY, ActionValueMethod.EPSILON_GREEDY]:
+        for step_size_type in [StepSizeType.SAMPLE_AVERAGE, StepSizeType.CONSTANT]:
+            runs = np.array(results[action_value_method][step_size_type])
+            is_optimal_arr = np.array([
+                [step["action"] == step["optimal"] for step in run]
+                for run in runs
+            ])
+            is_optimal_avg = is_optimal_arr.mean(axis=0)
+            plt.plot(is_optimal_avg, label=f"{step_size_type.name}")
+        plt.title(
+            f"Fraction of optimal action over Time {action_value_method.name}"
+        )
+        plt.xlabel("Timestep")
+        plt.ylabel("Fraction of Optimal Action")
+        plt.legend()
+        plt.show()
+
+
 def main():
     results = dict()
-    runs = 10*3
-    for action_value_method in [ActionValueMethod.GREEDY, ActionValueMethod.EPSILONG_GREEDY]:
-    # for action_value_method in [ActionValueMethod.EPSILONG_GREEDY]:
+    runs = 10*4
+    for action_value_method in [ActionValueMethod.GREEDY, ActionValueMethod.EPSILON_GREEDY]:
+    # for action_value_method in [ActionValueMethod.EPSILON_GREEDY]:
         results[action_value_method] = dict()
         for step_size_type in [StepSizeType.SAMPLE_AVERAGE, StepSizeType.CONSTANT]:
         # for step_size_type in [StepSizeType.SAMPLE_AVERAGE]:
@@ -119,7 +137,8 @@ def main():
                     )
     # display(results.keys())
     # display([results[key].keys() for key in results.keys()])
-    plot(results)
+    plot_reward(results)
+    plot_optimal(results)
     return
 
 if __name__ == "__main__":
