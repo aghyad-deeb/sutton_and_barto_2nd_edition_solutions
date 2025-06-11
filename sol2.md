@@ -69,3 +69,17 @@ $$
     &= 0
 \end{aligned}
 $$
+
+## 2.7
+We note that, as mentioned in the chapter, when $N_t(a) = 0$, the action $a$
+maximizes the term $(2.10)$ which means that we expect the average reward for
+the first 10 steps as not all actions are picked yet (the average reward is 
+around 0 based on the design of the bandits). However, at the 11th step, UCB
+starts actually using the information it collected and picks the top estimated
+action (note that it exactly picks the top estimated action at step 11 as the
+uncertainties are equal at that point); let's call this action $a_{11}$. After
+the 11th step, however, the uncertainty for $a_{11}$ will decrease which will
+decrease the upper confidence bound for it while other actions have more
+uncertainty, leading to other actions, often with lower point-estimate of
+reward, being picked. When averaging over 1000 runs, we expect the point
+estimates to be often correct, even when the sample size is 1 before step 11.
