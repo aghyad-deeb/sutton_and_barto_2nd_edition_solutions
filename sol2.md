@@ -83,3 +83,15 @@ decrease the upper confidence bound for it while other actions have more
 uncertainty, leading to other actions, often with lower point-estimate of
 reward, being picked. When averaging over 1000 runs, we expect the point
 estimates to be often correct, even when the sample size is 1 before step 11.
+
+## 2.9
+The logistic funciton has the form:
+$$
+\sigma(x) = \frac{e^x}{1 + e^x}
+$$
+In the case of two actions $a_1, a_2$, we have the softmax mass function:
+$$\begin{aligned}
+    P(A_t = a_1) &= \frac{e^{H_t(a_1)}}{e^{H_t(a_1)} + e^{H_t(a_2)}} \\
+    &= \frac{e^{H_t(a_1) - H_t(a_2)}}{1 + e^{H_t(a_1) - H_t(a_2)}} \\
+\end{aligned}$$
+Which is the same as the logitistic/sigmoid function when the input is $H_t(a_1) - H_t(a_2)$
