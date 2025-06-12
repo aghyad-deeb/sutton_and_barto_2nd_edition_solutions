@@ -95,3 +95,7 @@ $$\begin{aligned}
     &= \frac{e^{H_t(a_1) - H_t(a_2)}}{1 + e^{H_t(a_1) - H_t(a_2)}} \\
 \end{aligned}$$
 Which is the same as the logitistic/sigmoid function when the input is $H_t(a_1) - H_t(a_2)$
+
+## 2.10
+(a) when you don't know which task you're facing at each time step, the expectation of action 1 is $E[R_1] = 0.5 * 10 + 0.5 * 90 = 50$ and the expectation of the reward when choosing action 2 is $E[R_2] = 0.5 * 20 + 0.5*80 = 50$. Therefore, the expected reward is always $50$ and it does not matter which arm you pull.
+(b) In the case where we can tell which setting we're in, the best expected reward is $E[R*] 0.5 * 20 + 0.5 * 90 = 55$ which we get by action 1 in case B and action 2 in case A.
