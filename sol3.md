@@ -11,3 +11,9 @@ The action could be one active thought that the person can think of.
 next election. The reward is how satisfied they are with the policies being
 issued. The state is the result of the election (since it's out of the control
 of the agnet) and the policies.
+
+## 3.2
+Problems where the state space is infinite. For example, when the state is a location in a continous environment. Yet, it's still possible to discretize the space. 
+
+## 3.3 
+I think that a good place to draw the line is the highest level place where the agent has a lot of control. For example, if we were to choose the framing of where to drive, we would be missing out on the fact that where we drive is not completely in our control; the car may break down. Howover, nothing is really fully under control, and if we were to got to a level like the muscle twitches, it becomes less helpful as the action space is much larger. There's a tradeoff between how much control you have and how small the action space is.
