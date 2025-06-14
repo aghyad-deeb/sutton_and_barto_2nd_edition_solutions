@@ -48,3 +48,30 @@ $$
 It differs from the discounted continuing case in that it does not include
 failures after the first one, so the return is strictly larger in the episodic
 case.
+
+## 3.7
+We note that with such a design, the expected reward is always the same: 1. The agent is not incentivized to finish early since it doesn't give it more rewards, so the agent does not learn to try to escape as experiments where it escapes early or takes arbitrarly long to escape give the same reward.
+
+## 3.8
+We have an episodic, discounted case. 
+$$
+\begin{aligned}
+G_5 &= 0 \\
+G_4 &= 2 \\
+G_3 &= 3 + 0.5 * 2 = 4 \\
+G_2 &= R_3 + \gamma G_3 = 6 + 0.5 * 4 = 8 \\
+G_1 &= 2 + 0.5 * 8 = 6 \\
+G_0 &= -1 * 0.5 * 6 = 2
+\end{aligned}
+$$
+
+## 3.9
+$$
+G_1 = 7 \, \sum_{i = 0}^{\infty} \gamma^i = \frac{7}{1 - \gamma}  = 70
+$$
+$$
+G_0 = 2 + 0.9 * 70 = 51
+$$
+
+## 3.10
+The equality follows immediatly from the sum of terms of a geometric series.
