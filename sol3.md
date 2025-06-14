@@ -17,3 +17,11 @@ Problems where the state space is infinite. For example, when the state is a loc
 
 ## 3.3 
 I think that a good place to draw the line is the highest level place where the agent has a lot of control. For example, if we were to choose the framing of where to drive, we would be missing out on the fact that where we drive is not completely in our control; the car may break down. Howover, nothing is really fully under control, and if we were to got to a level like the muscle twitches, it becomes less helpful as the action space is much larger. There's a tradeoff between how much control you have and how small the action space is.
+
+## 3.4
+(I decided to do my own example here since the Example 3.3 has an infinte number of possible and therefore the table would have an infinite number of rows)
+for x > 0:
+
+|s | a | s' | r |p(s', r\| s, a) | 
+|--|-- |----|---|--------------| 
+| high | search | high | x
