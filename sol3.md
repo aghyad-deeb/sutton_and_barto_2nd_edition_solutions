@@ -19,9 +19,32 @@ Problems where the state space is infinite. For example, when the state is a loc
 I think that a good place to draw the line is the highest level place where the agent has a lot of control. For example, if we were to choose the framing of where to drive, we would be missing out on the fact that where we drive is not completely in our control; the car may break down. Howover, nothing is really fully under control, and if we were to got to a level like the muscle twitches, it becomes less helpful as the action space is much larger. There's a tradeoff between how much control you have and how small the action space is.
 
 ## 3.4
-(I decided to do my own example here since the Example 3.3 has an infinte number of possible and therefore the table would have an infinite number of rows)
-for x > 0:
+(It's unclear to me if this is intended, bu I decided to do my own example here since Example 3.3 has an infinte number of possible rewards and therefore the table would have an infinite number of rows. Example 3.3 also has no indication of the probabilities of different rewards.)
+Consider a simplified version of Example 3.3 where the robot gets 2 cans if actively searching and 1 can if waiting.
 
 |s | a | s' | r |p(s', r\| s, a) | 
-|--|-- |----|---|--------------| 
-| high | search | high | x
+|--|-- |----|---|-----------------------| 
+| high | search | high | 2 | $\alpha$ |
+| high | search | low | 2 | $1 - \alpha$ |
+| high | wait | high | 1 | 1 |
+|low | search | high | -3 | $1 - \beta$ |
+|low | search | low | 2 | $\beta$ |
+|low | wait| low | 1 | 1| 
+| low | recharge | high | 0 | 1
+
+## 3.5
+We need to make sure the terminal state is included:
+$$
+\sum_{s' \in \mathcal{S^+}} \, \sum_{r \in \mathcal{R}}
+p(s', r | s, a) = 1, \; \text{for all} \, s, s
+\in \mathcal{S}, \, a \in \mathcal{A}(s).
+$$
+
+## 3.6
+In a discounted episodic case, the return is:
+$$
+G_t = - \gamma^{T - t}
+$$
+It differs from the discounted continuing case in that it does not include
+failures after the first one, so the return is strictly larger in the episodic
+case.
