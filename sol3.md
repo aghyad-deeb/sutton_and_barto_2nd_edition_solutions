@@ -75,3 +75,9 @@ $$
 
 ## 3.10
 The equality follows immediatly from the sum of terms of a geometric series.
+
+## 3.11
+$$
+E[R_{t + 1} | S_t = s] = \sum_{a \in \mathcal{A}(s)} \pi (a | s) 
+\sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s', r | a, s) \; r
+$$
