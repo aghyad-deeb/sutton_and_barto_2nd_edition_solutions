@@ -120,5 +120,33 @@ q_{\pi} (s, a)
 \\
 q_{\pi} (s, a)
     = \sum_{r \in \mathcal{R}} \sum_{s' \in \mathcal{S}} p(r, s' | S_t = s, A_t=a) \;r\;
-        + E_{\pi} [\gamma v(s'')]
+        + E_{\pi} [\gamma \, v(s'')]
+\\
+q_{\pi} (s, a)
+    = \sum_{r \in \mathcal{R}} \sum_{s' \in \mathcal{S}} p(r, s' | S_t = s, A_t=a) \;r\;
+        + \gamma \, v(s'')
+$$
+
+When important step is the use of the law of total expectation, when going from
+$E_{\pi} [\sum_{k = 1}^{\infty} \gamma^k R_{t + k + 1} | S_t= s, A_t = a]$ to
+$E_{\pi} [E_{\pi}[\sum_{k = 1}^{\infty} \gamma^k R_{t + k + 1} | S_t= s, A_t = a, S_{t + 1} = s'']]$
+we need to make sure that $\pi$ captures the randomness that leads to the
+choice of $s''$. We note that the choice, by the definition in the book,
+the subscript $\pi$ means the randomness when the agent follows policy $\pi$.
+This captures two sorts of randomness; randomness due to the policy itself
+(how the agent chooses the next action given the current state), and randomness
+due to the dynamic (given a state and an action, what is the next state).
+The second source of randomness is the one we use in our application of the law
+of total expectation; given state $S_t = s$ and action $A_t = a$, the
+randonmness of the dynamics dictates what $S_{t + 1}$ should be.
+
+## 3.14
+
+$$
+v_{\pi}(s) = \sum_a \pi(a|s) \sum_{s', r} p(s', r | s, a) [r + \gamma v_{\pi}(s')]
+$$
+$$
+0.7 = \frac{1}{4} * 1 (0 + 0.9 * 2.3) + \frac{1}{4} * 1 (0 + 0.9 * 0.4)
+    + \frac{1}{4} * 1 (0 + 0.9 *0.7) + \frac{1}{4} * 1 * (0 + 0.9 * (-0.4))
+    = 0.675
 $$
