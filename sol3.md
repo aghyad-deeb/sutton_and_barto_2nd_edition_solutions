@@ -81,3 +81,44 @@ $$
 E[R_{t + 1} | S_t = s] = \sum_{a \in \mathcal{A}(s)} \pi (a | s) 
 \sum_{s' \in \mathcal{S}} \sum_{r \in \mathcal{R}} p(s', r | a, s) \; r
 $$
+
+## 3.12
+$$
+\begin{aligned}
+v_{\pi} (s) &= E_{\pi}[G_t | S_t = s] \\
+&= E_{\pi}[E_{\pi}[G_t | S_t = s, A_t = a]] \\
+&= E_{\pi}[q_{\pi}(s, a)] \\
+&= \sum_{a \in \mathcal{A}} q_{\pi}(s, a) \pi(a)
+\end{aligned}
+$$
+
+## 3.13
+$$
+\begin{align*}
+q_{\pi} (s, a)
+    &= E_{\pi} [\sum_{k = 0}^{\infty} \gamma^k R_{t + k + 1} | S_t= s, A_t = a]\\
+    &= E_{\pi} [R_{t + 1} | S_t=s, A_t=a]
+        + E_{\pi} [\sum_{k = 1}^{\infty} \gamma^k R_{t + k + 1} | S_t= s, A_t = a] \\
+\end{align*}
+\\
+\text{
+    Expanding the expectation for the first term and using the law of total 
+    expectation for the second term
+}\\
+\begin{align*}
+q_{\pi} (s, a)
+    &= \sum_{r \in \mathcal{R}} p(r | S_t = s, A_t=a) \;r\;
+        + E_{\pi} [E_{\pi} [\sum_{k = 1}^{\infty} \gamma^k R_{t + k + 1} | S_t= s, A_t = a, S_{t+1} = s'']]
+\end{align*}
+\\
+\text{Using the law of total probability for the second term, and using
+the Markov property on the second term}
+\\
+q_{\pi} (s, a)
+    = \sum_{r \in \mathcal{R}} \sum_{s' \in \mathcal{S}} p(r, s' | S_t = s, A_t=a) \;r\;
+        + E_{\pi} [E_{\pi} [\sum_{k = 1}^{\infty} \gamma^k R_{t + k + 1} |  S_{t+1} = s'']]
+\\
+q_{\pi} (s, a)
+    = \sum_{r \in \mathcal{R}} \sum_{s' \in \mathcal{S}} p(r, s' | S_t = s, A_t=a) \;r\;
+        + E_{\pi} [\gamma v(s'')]
+$$
